@@ -38,6 +38,15 @@
             overflow-x: hidden;
         }
         
+        .qr-item .profile-photo {
+            /* Sovrascrivi il padding e usa object-fit per riempire */
+            padding: 0; 
+            border-radius: 50%; /* Rendi l'immagine circolare */
+            object-fit: cover !important; 
+            width: 100px; 
+            height: 100px;
+        }
+
         /* Contenitore principale del volantino, non includerà il footer */
         .main-content {
             width: 100vw; /* Forzi il contenitore a prendere ESATTAMENTE la larghezza del viewport */
@@ -555,7 +564,7 @@
                     <p class="sub-card-text">+5% Aggiuntivo (totale <b>10%</b>) se gestisci il contatto post-vendita e la raccolta/verifica dei contenuti.</p>
                     
                     <h5 class="sub-card-title">Il tuo Guadagno</h5>
-                    <p class="sub-card-text">Su un progetto da 10.000€ netti, la tua commissione massima è di <b>1.000€</b> (ipotizzando zero spese fisse).</p>
+                    <p class="sub-card-text">Su un progetto da 10.000€ netti, la tua commissione è di <b>1.000€</b> (ipotizzando zero spese fisse).</p>
                 </div>
 
                 <div class="point-card">
@@ -599,6 +608,12 @@
                             <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
                         </svg>
                         <p>Contattaci</p>
+                    </a>
+                    
+                    <a href="https://enrico2399.github.io/Enrico/" class="qr-item" target="_blank">
+                        <img src="https://enrico2399.github.io/Enrico/index_files/avatar.jpg" 
+                            alt="Foto profilo Referente" 
+                            class="profile-photo"> <p>Referente</p>
                     </a>
 
                 </div>
