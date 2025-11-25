@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volantino Nordev</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nordev-blue: #72a9e5;
+            --nordev-dark-blue: #1b3a5b;
+            --nordev-light-blue: #e0f0ff;
+            --nordev-text: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #71a6e7 0%, #3058a5 100%);
+            color: var(--nordev-text);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .flyer-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        header.flyer-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--nordev-dark-blue);
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background-color: var(--nordev-light-blue);
+            border-radius: 1rem;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            width: 100%;
+            background-color: var(--nordev-dark-blue);
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .card-header .card-icon {
+            position: absolute;
+            left: 1.5rem;
+            width: 35px;
+            height: 35px;
+            filter: invert(1);
+        }
+        
+        .card-header .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: var(--nordev-text);
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid #eee;
+        }
+
+        .contact-title {
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--nordev-dark-blue);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border: 1px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .qr-codes {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+        
+        .contact-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--nordev-dark-blue);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-label {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flyer-container">
+        <header class="flyer-header">
+            <img src="logo-nordev.webp" width="150" height="150">
+            <h1 class="main-title">Nordev: Soluzioni Informatiche per il Tuo Successo</h1>
+        </header>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">Siti Web e Web App</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Velocità, Sicurezza, Libertà. Sviluppiamo su misura, con codice pulito e design unico.</p>
+                    <span class="card-icon">💻</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">E-commerce Shopify</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Vendi online con la piattaforma leader. Ci occupiamo di configurazione e gestione.</p>
+                    <span class="card-icon">🛒</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">Ottimizzazione Google Maps</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Domina le ricerche locali. Più clienti con la giusta gestione del tuo Google Business Profile.</p>
+                    <span class="card-icon">📍</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">Social Media Management</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Facebook & Instagram. Costruiamo la tua presenza online.</p>
+                    <span class="card-icon">👥</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">Analisi Traffico Web</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Trasforma i dati in decisioni. Report e strategie di crescita.</p>
+                    <span class="card-icon">📈</span>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-header">
+                    <h3 class="card-title">Evoluzione Sito Esistente</h3>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Aggiorna e potenzia il tuo sito con nuove funzionalità, restyling e ottimizzazione.</p>
+                    <span class="card-icon">🔄</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h4 class="contact-title">Contattaci per una consulenza gratuita!</h4>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="qr_wh.JPG" class="qr-image" alt="QR Code WhatsApp" width="200" height="150">
+                </div>
+                <div class="contact-item">
+                    <span class="contact-number">320 026 0469</span>
+                    <p class="contact-label">Chiamaci o scrivici su WhatsApp</p>
+                </div>
+                <div class="contact-item">
+                    <img src="qr_site.JPG" class="qr-image" alt="QR Code Sito Web" width="200" height="150">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

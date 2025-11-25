@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruitment | Partner Commerciale Freelance - Nordevit</title>
+    <!-- Inclusione del font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --nordev-blue: #72a9e5;
+            --nordev-dark-blue: #1b3a5b;
+            --nordev-light-blue: #e0f0ff;
+            --nordev-text: #1f2937;
+            --highlight-color: #e57272; /* Un colore d'impatto per le provvigioni */
+            --footer-bg: #112a43; /* Colore di sfondo scuro per il footer */
+            --footer-text: #ffffff;
+            --footer-link: #a0c0e0;
+            --footer-contact-color: #a0c0e0; /* Colore per le info di contatto nel footer */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #71a6e7 0%, #3058a5 100%);
+            color: var(--nordev-text);
+            margin: 0;
+            padding: 0; 
+            display: flex;
+            flex-direction: column; 
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Contenitore principale del volantino, non includerà il footer */
+        .main-content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 0;
+            flex-grow: 1; 
+        }
+
+        .flyer-container {
+            width: 95%;
+            max-width: 1000px;
+            background-color: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        header.flyer-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+            border-radius: 50%; 
+            transition: transform 0.3s;
+        }
+        
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--nordev-dark-blue);
+            line-height: 1.2;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--nordev-blue);
+            margin-bottom: 2rem;
+        }
+        
+        /* Sezione Riassunto/Introduttiva */
+        .intro-box {
+            background-color: var(--nordev-light-blue);
+            border: 3px solid var(--nordev-blue);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .intro-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .intro-box b {
+            color: var(--nordev-dark-blue);
+        }
+
+        /* Sezione Punti Chiave (Grid) */
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+
+        .point-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            /* Aggiunta transizione per l'effetto zoom/pulsato */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s; 
+            text-align: center;
+        }
+
+        .point-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: scale(1.03); /* Effetto Zoom/Pulsato */
+        }
+
+        .point-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--highlight-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+        }
+        
+        .sub-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--nordev-dark-blue);
+            margin: 1.5rem 0 0.5rem 0;
+            text-transform: uppercase;
+        }
+
+        .sub-card-text {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #555;
+            margin-bottom: 1.5rem;
+            padding: 0 5px;
+        }
+        
+        /* Sezione Contatti */
+        .contact-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .contact-title {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--nordev-dark-blue);
+            margin-bottom: 2rem;
+        }
+
+        .qr-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4rem; /* Aumento lo spazio tra le due icone */
+        }
+        
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            /* Aggiunta transizione per l'effetto zoom/pulsato sulle icone di contatto */
+            transition: transform 0.3s ease-in-out; 
+        }
+        
+        .qr-item:hover {
+            transform: scale(1.05); /* Effetto Pulsato/Zoom per le icone */
+        }
+        
+        .qr-item img, .qr-item svg {
+            /* Dimensioni fisse per garantire che logo e icona email siano uguali */
+            width: 100px; 
+            height: 100px;
+            padding: 15px; /* Aumento il padding per compensare la riduzione di dimensione base e renderle visibili */
+            background-color: var(--nordev-light-blue); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        
+        .qr-item svg {
+            /* Sovrascrivo lo stile precedente per l'SVG */
+            padding: 15px; 
+            box-sizing: content-box;
+            fill: var(--nordev-dark-blue); 
+            border: none; /* Rimuovo il bordo extra per l'SVG */
+            background-color: #fff; /* Sfondo bianco per l'icona email */
+        }
+        
+        /* Assicuro che l'area del blocco sia uniforme */
+        .qr-item:first-child img {
+             background-color: var(--nordev-light-blue);
+             border: 1px solid var(--nordev-light-blue);
+        }
+        .qr-item:last-child svg {
+             border: 1px solid var(--nordev-light-blue);
+        }
+
+
+        .qr-item p {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--nordev-dark-blue);
+        }
+        
+        /* ----------------------- */
+        /* Stili Footer Nordevit */
+        /* ----------------------- */
+        .footer-nordev {
+            width: 100%;
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 1.5rem 1.5rem; 
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap; 
+            align-items: center;
+            justify-content: center; 
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 0 1.5rem; 
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #334e68; 
+        }
+        
+        .footer-info-line {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--footer-contact-color);
+            margin: 0.25rem 0; 
+            white-space: nowrap; 
+        }
+        
+        .footer-info-line a {
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-info-line a:hover {
+            color: var(--nordev-blue);
+        }
+
+
+        .footer-bottom {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0.5rem 0;
+        }
+
+
+        /* Media Query per Mobile */
+        @media (max-width: 768px) {
+            .flyer-container {
+                padding: 1.5rem;
+            }
+            .main-title {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .intro-box p {
+                font-size: 0.9rem;
+            }
+            .key-points {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .point-card h4 {
+                font-size: 1.1rem;
+            }
+            .qr-info {
+                gap: 1.5rem;
+                flex-direction: column; 
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-bottom: 1rem;
+            }
+            
+            .footer-info-line {
+                 white-space: normal; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenuto principale del volantino -->
+    <div class="main-content">
+        <div class="flyer-container">
+            <header class="flyer-header">
+                <!-- Logo Nordevit cliccabile -->
+                <a href="https://www.nordevit.it" target="_blank" title="Visita Nordevit">
+                    <img src="logo-nordev.webp" class="logo-placeholder" alt="Logo Nordevit">
+                </a>
+                <h1 class="main-title">Opportunità Freelance Esclusiva: Partner Commerciale nel Digitale</h1>
+                <p class="subtitle">Provvigioni fino al 10% sul valore netto del progetto!</p>
+            </header>
+
+            <div class="intro-box">
+                <p>Sei un professionista ambizioso, cerchi una fonte di <b>guadagno extra altamente flessibile</b> e vuoi collaborare con un team di sviluppo digitale esperto?</p>
+                <p>Unisciti a <b>Nordevit</b>, due esperti digitali con un <b>decennio di esperienza</b>, e trasforma le tue ore libere in entrate significative vendendo soluzioni web personalizzate con una struttura provvigionale tra le più competitive del mercato.</p>
+            </div>
+            
+            <h2 style="color: var(--nordev-dark-blue); font-weight: 700; margin-bottom: 2rem;">I VANTAGGI CHIAVE</h2>
+
+            <div class="key-points">
+                
+                <div class="point-card">
+                    <h4>💰 Massimizzazione dei Profitti</h4>
+                    
+                    <h5 class="sub-card-title">Commissione Base 5%</h5>
+                    <p class="sub-card-text">5% sulla vendita di Siti Web, Gestionali, Web App o E-commerce Shopify.</p>
+                    
+                    <h5 class="sub-card-title">Extra Bonus Gestione (+5%)</h5>
+                    <p class="sub-card-text">+5% Aggiuntivo (totale <b>10%</b>) se gestisci il contatto post-vendita e la raccolta/verifica dei contenuti.</p>
+                    
+                    <h5 class="sub-card-title">Il tuo Guadagno</h5>
+                    <p class="sub-card-text">Su un progetto da 10.000€ netti, la tua commissione massima è di <b>1.000€</b>.</p>
+                </div>
+
+                <div class="point-card">
+                    <h4>⏰ Autonomia e Flessibilità Totale</h4>
+                    
+                    <h5 class="sub-card-title">Lavoro Part-Time</h5>
+                    <p class="sub-card-text">Perfetto per essere svolto nel tuo <b>tempo libero</b>, senza vincoli di orario o ufficio.</p>
+                    
+                    <h5 class="sub-card-title">Acquisizione Semplificata</h5>
+                    <p class="sub-card-text">Ti forniamo <b>3 template di base</b> per ogni richiesta del cliente per facilitare la tua presentazione.</p>
+                    
+                    <h5 class="sub-card-title">Supporto Tecnico</h5>
+                    <p class="sub-card-text">Concentrati solo sulla vendita, alla realizzazione completa pensano i nostri esperti (10 anni di esperienza).</p>
+                </div>
+
+                <div class="point-card">
+                    <h4>🛡️ Vantaggi Fiscali e Servizi</h4>
+                    
+                    <h5 class="sub-card-title">Prestazione Occasionale</h5>
+                    <p class="sub-card-text">Se i tuoi compensi annuali <b>non superano i 5.000€</b>, puoi operare con la <b>ritenuta d'acconto</b>.</p>
+                    
+                    <h5 class="sub-card-title">Contratto Freelance</h5>
+                    <p class="sub-card-text">Lavori in regime di <b>libera professione (Freelance)</b>.</p>
+
+                    <h5 class="sub-card-title">Catalogo di Alta Gamma</h5>
+                    <p class="sub-card-text">Siti Web, Sistemi Gestionali, Web App e E-commerce Shopify.</p>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h4 class="contact-title">Sei pronto a trasformare la tua flessibilità in libertà finanziaria?</h4>
+                <div class="qr-info">
+
+                    <!-- Blocco 1: Link al Sito con Immagine Logo (Visita il Sito) -->
+                    <a href="https://www.nordevit.it" class="qr-item" target="_blank">
+                        <!-- L'immagine del logo viene usata come "icona" del sito -->
+                        <img src="logo-nordev.webp" alt="Logo Nordevit - Vai al Sito">
+                        <p>Visita il nostro sito Nordevit</p>
+                    </a>
+
+                    <!-- Blocco 2: Link a Contatti con Icona Email (Contattaci) -->
+                    <a href="https://www.nordevit.it/#contatti" class="qr-item" target="_blank">
+                        <!-- Icona Email in SVG -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
+                        </svg>
+                        <p>Contattaci</p>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer in stile Nordevit.it -->
+    <footer class="footer-nordev">
+        <div class="footer-content">
+            <!-- Righe di informazione richieste disposte orizzontalmente -->
+            <p class="footer-info-line">© Nordevit.it</p>
+            <span class="footer-info-line" style="margin: 0 0.5rem;">•</span>
+            <p class="footer-info-line">Mail: <a href="mailto:info@nordevit.it">info@nordevit.it</a></p>
+            <span class="footer-info-line" style="margin: 0 0.5rem;">•</span>
+            <p class="footer-info-line">Telefono: <a href="tel:+393880764992">+39 388 076 4992</a></p>
+            <span class="footer-info-line" style="margin: 0 0.5rem;">•</span>
+            <p class="footer-info-line">P.IVA 04316111204</p>
+            <span class="footer-info-line" style="margin: 0 0.5rem;">•</span>
+            <p class="footer-info-line">Based in Treviso</p>
+        </div>
+
+        <div class="footer-bottom">
+            <!-- Riga 2: Copyright con anno aggiornato -->
+            <p>© 2025 Nordevit. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+</body>
+</html>
