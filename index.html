@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | Partner Commerciale Freelance - Nordevit</title>
-    <!-- Inclusione del font Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
+        /* Aggiunta di box-sizing globale per prevenire overflow */
+        * {
+            box-sizing: border-box;
+        }
+
         :root {
             --nordev-blue: #72a9e5;
             --nordev-dark-blue: #1b3a5b;
@@ -31,11 +35,13 @@
             justify-content: flex-start;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         /* Contenitore principale del volantino, non includerà il footer */
         .main-content {
-            width: 100%;
+            width: 100vw; /* Forzi il contenitore a prendere ESATTAMENTE la larghezza del viewport */
+            max-width: 100vw;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -44,12 +50,12 @@
         }
 
         .flyer-container {
-            width: 95%;
+            width: 100%;
             max-width: 1000px;
             background-color: #fff;
             border-radius: 1.5rem;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            padding: 3rem;
+            padding: 3rem 1.5rem;
             text-align: center;
         }
 
@@ -88,6 +94,28 @@
             margin-bottom: 2rem;
         }
         
+        /* Stile per il nuovo pulsante Calcola Provvigioni */
+        .calculate-button {
+            background-color: var(--highlight-color);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(229, 114, 114, 0.4);
+            margin-bottom: 3rem; /* Spazio dopo il pulsante */
+            text-transform: uppercase;
+        }
+
+        .calculate-button:hover {
+            background-color: #c75e5e; /* Tonalità più scura al passaggio del mouse */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 114, 114, 0.6);
+        }
+
         /* Sezione Riassunto/Introduttiva */
         .intro-box {
             background-color: var(--nordev-light-blue);
@@ -122,14 +150,13 @@
             padding: 1.5rem 1rem;
             border-radius: 0.75rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            /* Aggiunta transizione per l'effetto zoom/pulsato */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s; 
             text-align: center;
         }
 
         .point-card:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            transform: scale(1.03); /* Effetto Zoom/Pulsato */
+            transform: scale(1.03); 
         }
 
         .point-card h4 {
@@ -154,7 +181,6 @@
             font-size: 0.9rem;
             line-height: 1.4;
             color: #555;
-            margin-bottom: 1.5rem;
             padding: 0 5px;
         }
         
@@ -176,7 +202,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 4rem; /* Aumento lo spazio tra le due icone */
+            gap: 4rem; 
         }
         
         .qr-item {
@@ -185,19 +211,21 @@
             align-items: center;
             text-decoration: none;
             color: inherit;
-            /* Aggiunta transizione per l'effetto zoom/pulsato sulle icone di contatto */
             transition: transform 0.3s ease-in-out; 
+
+            width: 250px;
+            min-height: 150px;
+            justify-content: space-between;
         }
         
         .qr-item:hover {
-            transform: scale(1.05); /* Effetto Pulsato/Zoom per le icone */
+            transform: scale(1.05); 
         }
         
         .qr-item img, .qr-item svg {
-            /* Dimensioni fisse per garantire che logo e icona email siano uguali */
             width: 100px; 
             height: 100px;
-            padding: 15px; /* Aumento il padding per compensare la riduzione di dimensione base e renderle visibili */
+            padding: 15px; 
             background-color: var(--nordev-light-blue); 
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
@@ -205,12 +233,11 @@
         }
         
         .qr-item svg {
-            /* Sovrascrivo lo stile precedente per l'SVG */
             padding: 15px; 
             box-sizing: content-box;
             fill: var(--nordev-dark-blue); 
-            border: none; /* Rimuovo il bordo extra per l'SVG */
-            background-color: #fff; /* Sfondo bianco per l'icona email */
+            border: none; 
+            background-color: #fff; 
         }
         
         /* Assicuro che l'area del blocco sia uniforme */
@@ -284,11 +311,148 @@
             margin: 0.5rem 0;
         }
 
+        /* ----------------------- */
+        /* Stili Modal (Overlay) */
+        /* ----------------------- */
+        .modal-overlay {
+            display: none; /* Inizialmente nascosto */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%; /* Copre l'intera larghezza */
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px; /* Max-width per desktop/tablet */
+            
+            max-height: 90vh; 
+            overflow-y: auto; 
+            
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--nordev-dark-blue);
+            transition: color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            color: var(--highlight-color);
+        }
+
+        .modal-title {
+            color: var(--nordev-dark-blue);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .range-group {
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+            border: 1px solid #eee;
+            border-radius: 0.5rem;
+            background-color: var(--nordev-light-blue);
+        }
+
+        .range-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--nordev-dark-blue);
+            margin-bottom: 0.75rem;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .range-display {
+            font-weight: 700;
+            color: var(--highlight-color);
+            float: right;
+        }
+
+        /* Stile personalizzato per l'input range */
+        input[type=range] {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            background: #ccc;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        /* Stile del pallino (thumb) */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--nordev-blue);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s;
+        }
+        
+        input[type=range]::-moz-range-thumb {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: var(--nordev-blue);
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        .results-box {
+            background-color: var(--nordev-dark-blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .results-box h4 {
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        #commission-result {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--highlight-color);
+            margin: 0;
+        }
+
 
         /* Media Query per Mobile */
         @media (max-width: 768px) {
             .flyer-container {
-                padding: 1.5rem;
+                padding: 1.5rem 10px;
             }
             .main-title {
                 font-size: 1.8rem;
@@ -302,15 +466,24 @@
             .key-points {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+                overflow-x: hidden;
             }
-            .point-card h4 {
-                font-size: 1.1rem;
-            }
+            /* Regola Aggiunta: Assicurati che l'allineamento non causi un'espansione */
             .qr-info {
                 gap: 1.5rem;
                 flex-direction: column; 
+                /* Aggiungiamo overflow nascosto anche qui se necessario */
+                overflow-x: hidden; 
+                width: 100%;
+                max-width: 100%;
             }
-            
+
+            .qr-item {
+                width: 100%; 
+                max-width: 95%; /* Lascia un piccolo margine */
+                align-self: center; /* Centra l'elemento nel contenitore */
+            }
+
             .footer-content {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -320,22 +493,49 @@
             .footer-info-line {
                  white-space: normal; 
             }
+
+            .modal-content {
+                padding: 1rem;
+                max-height: 90vh;
+                /* FIX: Utilizziamo vw per evitare l'overflow orizzontale */
+                max-width: 95vw;
+                width: 95vw;
+                box-sizing: border-box;
+            }
+            .range-group {
+                margin-bottom: 1.5rem;
+            }
+            #commission-result {
+                font-size: 2rem;
+            }
+            .calculate-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            .qr-item img, .qr-item svg {
+                width: 80px; /* Riduci la dimensione per sicurezza */
+                height: 80px;
+                padding: 10px; /* Riduci il padding (era 15px) */
+            }
+
         }
     </style>
 </head>
 <body>
-    <!-- Contenuto principale del volantino -->
     <div class="main-content">
         <div class="flyer-container">
             <header class="flyer-header">
-                <!-- Logo Nordevit cliccabile -->
                 <a href="https://www.nordevit.it" target="_blank" title="Visita Nordevit">
                     <img src="logo-nordev.webp" class="logo-placeholder" alt="Logo Nordevit">
                 </a>
                 <h1 class="main-title">Opportunità Freelance Esclusiva: Partner Commerciale nel Digitale</h1>
                 <p class="subtitle">Provvigioni fino al 10% sul valore netto del progetto!</p>
             </header>
-
+            
+            <button class="calculate-button" id="openModalBtn">
+                Calcola la Tua Provvigione
+            </button>
+            
             <div class="intro-box">
                 <p>Sei un professionista ambizioso, cerchi una fonte di <b>guadagno extra altamente flessibile</b> e vuoi collaborare con un team di sviluppo digitale esperto?</p>
                 <p>Unisciti a <b>Nordevit</b>, due esperti digitali con un <b>decennio di esperienza</b>, e trasforma le tue ore libere in entrate significative vendendo soluzioni web personalizzate con una struttura provvigionale tra le più competitive del mercato.</p>
@@ -355,7 +555,7 @@
                     <p class="sub-card-text">+5% Aggiuntivo (totale <b>10%</b>) se gestisci il contatto post-vendita e la raccolta/verifica dei contenuti.</p>
                     
                     <h5 class="sub-card-title">Il tuo Guadagno</h5>
-                    <p class="sub-card-text">Su un progetto da 10.000€ netti, la tua commissione massima è di <b>1.000€</b>.</p>
+                    <p class="sub-card-text">Su un progetto da 10.000€ netti, la tua commissione massima è di <b>1.000€</b> (ipotizzando zero spese fisse).</p>
                 </div>
 
                 <div class="point-card">
@@ -389,16 +589,12 @@
                 <h4 class="contact-title">Sei pronto a trasformare la tua flessibilità in libertà finanziaria?</h4>
                 <div class="qr-info">
 
-                    <!-- Blocco 1: Link al Sito con Immagine Logo (Visita il Sito) -->
                     <a href="https://www.nordevit.it" class="qr-item" target="_blank">
-                        <!-- L'immagine del logo viene usata come "icona" del sito -->
                         <img src="logo-nordev.webp" alt="Logo Nordevit - Vai al Sito">
                         <p>Visita il nostro sito Nordevit</p>
                     </a>
 
-                    <!-- Blocco 2: Link a Contatti con Icona Email (Contattaci) -->
                     <a href="https://www.nordevit.it/#contatti" class="qr-item" target="_blank">
-                        <!-- Icona Email in SVG -->
                         <svg viewBox="0 0 24 24">
                             <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/>
                         </svg>
@@ -410,10 +606,51 @@
         </div>
     </div>
     
-    <!-- Footer in stile Nordevit.it -->
+    <div class="modal-overlay" id="commissionModal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+            <h3 class="modal-title">Calcola il Tuo Guadagno </h3>
+
+            <div id="slider-container">
+                
+                <div class="range-group">
+                    <label for="ecommerce-range">E-commerce</label>
+                    <input type="range" id="ecommerce-range" min="700" max="7000" value="3850" step="50">
+                    <small>Range: € 700 - € 7.000</small><span class="range-display" id="ecommerce-value">€ 3.850</span>
+                </div>
+
+                <div class="range-group">
+                    <label for="vetrina-range">Sito Vetrina</label>
+                    <input type="range" id="vetrina-range" min="500" max="5000" value="2750" step="50">
+                    <small>Range: € 500 - € 5.000</small><span class="range-display" id="vetrina-value">€ 2.750</span>
+                </div>
+                
+                <div class="range-group">
+                    <label for="webapp-range">Web App</label>
+                    <input type="range" id="webapp-range" min="1000" max="10000" value="5500" step="100">
+                    <small>Range: € 1.000 - € 10.000</small><span class="range-display" id="webapp-value">€ 5.500</span>
+                </div>
+                
+                <div class="range-group">
+                    <label for="gestionale-range">Gestionale</label>
+                    <input type="range" id="gestionale-range" min="2500" max="20000" value="11250" step="250">
+                    <small>Range: € 2.500 - € 20.000</small><span class="range-display" id="gestionale-value">€ 11.250</span>
+                </div>
+
+            </div>
+            
+            <div class="results-box">
+    
+                <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Spese Fisse Medie: -25% sul Totale</h4>
+                <h4>La Tua Commissione del 10% sul Netto:</h4> 
+                <p id="commission-result">€ 1.751</p>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="footer-nordev">
         <div class="footer-content">
-            <!-- Righe di informazione richieste disposte orizzontalmente -->
             <p class="footer-info-line">© Nordevit.it</p>
             <span class="footer-info-line" style="margin: 0 0.5rem;">•</span>
             <p class="footer-info-line">Mail: <a href="mailto:info@nordevit.it">info@nordevit.it</a></p>
@@ -426,9 +663,78 @@
         </div>
 
         <div class="footer-bottom">
-            <!-- Riga 2: Copyright con anno aggiornato -->
             <p>© 2025 Nordevit. Tutti i diritti riservati.</p>
         </div>
     </footer>
+    
+    <script>
+        const commissionModal = document.getElementById('commissionModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        // Elementi per i calcoli
+        const sliders = document.querySelectorAll('#slider-container input[type="range"]');
+        const totalProjectsEl = document.getElementById('total-projects');
+        const commissionResultEl = document.getElementById('commission-result');
+
+        // Formattazione valuta Euro
+        const currencyFormatter = new Intl.NumberFormat('it-IT', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        });
+
+        // Funzione per aggiornare il calcolo e i display
+        function updateCommission() {
+            let totalValue = 0;
+
+            sliders.forEach(slider => {
+                const value = parseInt(slider.value);
+                totalValue += value;
+                
+                // Aggiorna il display accanto allo slider
+                const displayId = slider.id.replace('-range', '-value');
+                document.getElementById(displayId).textContent = currencyFormatter.format(value);
+            });
+
+            // NUOVA LOGICA DI CALCOLO
+            // 1. Applica la deduzione del 25% per le spese fisse
+            const fixedCostRate = 0.25; // 25%
+            const projectValueAfterCosts = totalValue * (1 - fixedCostRate);
+
+            // 2. Calcola la commissione massima (10%) sul valore NETTO (dopo i costi)
+            const maxCommissionRate = 0.10; // 10%
+            const maxCommission = projectValueAfterCosts * maxCommissionRate;
+
+            // Aggiorna i risultati finali
+            // totalProjectsEl.textContent = currencyFormatter.format(totalValue); // Rimosso o commentato se non serve
+            commissionResultEl.textContent = currencyFormatter.format(maxCommission);
+        }
+
+        // 1. Inizializzazione: Aggiorna i valori al caricamento per mostrare quelli di default
+        document.addEventListener('DOMContentLoaded', updateCommission);
+
+        // 2. Listener per gli Sliders: Ricalcola ad ogni cambio
+        sliders.forEach(slider => {
+            slider.addEventListener('input', updateCommission);
+        });
+
+        // 3. Logica Modal
+        openModalBtn.onclick = function() {
+            commissionModal.style.display = 'flex';
+        }
+
+        closeModalBtn.onclick = function() {
+            commissionModal.style.display = 'none';
+        }
+
+        // Chiudi il modale cliccando fuori
+        window.onclick = function(event) {
+            if (event.target == commissionModal) {
+                commissionModal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
